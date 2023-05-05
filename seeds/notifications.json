@@ -1,0 +1,136 @@
+[
+  {
+    "_id": "6373e1ac1673969ef16dbbe4",
+    "userIcon": "photo.jpg",
+    "title": "hamada started following you",
+    "type": "newFollower",
+    "text": "User hamada started following you",
+    "sourceThing": "t2_hamada",
+    "createdAt": {
+      "$date": {
+        "$numberLong": "1671095435432"
+      }
+    }
+  },
+  {
+    "_id": "6373e3001673969ef16dbbe5",
+    "userIcon": "photo.jpg",
+    "title": "New comment",
+    "type": "replyToPost",
+    "text": "You have new comment",
+    "sourceThing": "t2_hamada",
+    "createdAt": {
+      "$date": {
+        "$numberLong": "1671181835432"
+      }
+    }
+  },
+  {
+    "_id": "6373e30d1673969ef16dbbe6",
+    "communityIcon": "photo.jpg",
+    "title": "Ban",
+    "type": "ban",
+    "text": "imagePro235 has banned you",
+    "sourceThing": "t5_imagePro235",
+    "createdAt": {
+      "$date": {
+        "$numberLong": "1671441035432"
+      }
+    }
+  },
+  {
+    "_id": "6373e60c1673969ef16dbbe9",
+    "communityIcon": "photo.jpg",
+    "title": "Mute",
+    "type": "mute",
+    "text": "imagePro235 has muted you",
+    "sourceThing": "t5_imagePro235",
+    "createdAt": {
+      "$date": {
+        "$numberLong": "1671268235432"
+      }
+    }
+  },
+  {
+    "_id": "6373e63c1673969ef16dbbeb",
+    "communityIcon": "photo.jpg",
+    "title": "Unmute",
+    "type": "unmute",
+    "text": "imagePro235 has unmuted you",
+    "sourceThing": "t5_imagePro235",
+    "createdAt": {
+      "$date": {
+        "$numberLong": "1671354635432"
+      }
+    }
+  },
+  {
+    "_id": "63a06f7d17b3dde41c5bb58c",
+    "userIcon": "user-t2_hamada-1668263597432.jpg",
+    "title": "You have a new follower",
+    "type": "newFollower",
+    "text": "t2_lotfy2 has followed you",
+    "sourceThing": "t2_lotfy2",
+    "isDeleted": false,
+    "createdAt": {
+      "$date": {
+        "$numberLong": "1671458620473"
+      }
+    }
+  },
+  {
+    "_id": "63a06fa1589971c9776826a4",
+    "userIcon": "user-t2_hamada-1668263597432.jpg",
+    "title": "You have a new follower",
+    "type": "newFollower",
+    "text": "t2_lotfy2 has followed you",
+    "sourceThing": "t2_lotfy2",
+    "isDeleted": false,
+    "createdAt": {
+      "$date": {
+        "$numberLong": "1671458698182"
+      }
+    }
+  },
+  {
+    "_id": "63a074bf19df4c7b2908eac9",
+    "userIcon": "user-t2_hamada-1668263597432.jpg",
+    "title": "You have a new follower",
+    "type": "newFollower",
+    "text": "u lotfy2 has followed you",
+    "sourceThing": "t2_lotfy2",
+    "isDeleted": false,
+    "createdAt": {
+      "$date": {
+        "$numberLong": "1671459950000"
+      }
+    }
+  },
+  {
+    "_id": "63a0750266ca388880862501",
+    "userIcon": "user-t2_hamada-1668263597432.jpg",
+    "title": "You have a new follower",
+    "type": "newFollower",
+    "text": "u/lotfy2 has followed you",
+    "sourceThing": "t2_lotfy2",
+    "isDeleted": false,
+    "createdAt": {
+      "$date": {
+        "$numberLong": "1671460083481"
+      }
+    }
+  },
+  {
+    "_id": "63a0c5ffc0bf3e37ccfdfab9",
+    "userIcon": "default.jpg",
+    "title": "You have a new follower",
+    "type": "newFollower",
+    "text": "u/moazMohamed has followed you",
+    "sourceThing": "t2_moazMohamed",
+    "createdAt": {
+      "$date": {
+        "$numberLong": "1671480695154"
+      }
+    }
+  }
+]

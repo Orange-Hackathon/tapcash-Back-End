@@ -1,0 +1,198 @@
+[
+  {
+    "_id": "6398f05e11227639215bfd97",
+    "fromID": "t2_lotfy2",
+    "toID": "t2_hamada",
+    "isDeleted": false,
+    "unread_status": true,
+    "subject": "welcome message",
+    "createdAt": {
+      "$date": {
+        "$numberLong": "1670967375909"
+      }
+    },
+    "text": "hamada go to headquarters"
+  },
+  {
+    "_id": "6398f06111227639215bfd9f",
+    "fromID": "t2_lotfy2",
+    "toID": "t2_nabil",
+    "isDeleted": true,
+    "unread_status": true,
+    "subject": "welcome message",
+    "createdAt": {
+      "$date": {
+        "$numberLong": "1670967375909"
+      }
+    },
+    "text": "hi nabil from lotfy"
+  },
+  {
+    "_id": "6398f06911227639215bfda7",
+    "fromID": "t2_lotfy2",
+    "toID": "t2_nabil",
+    "isDeleted": false,
+    "unread_status": true,
+    "subject": "welcome message",
+    "createdAt": {
+      "$date": {
+        "$numberLong": "1670967375909"
+      }
+    },
+    "text": "hi nabil from lotfy"
+  },
+  {
+    "_id": "6398f21234f17419013b954a",
+    "fromID": "t2_nabil",
+    "toID": "t2_lotfy2",
+    "isDeleted": false,
+    "unread_status": true,
+    "subject": "order message",
+    "createdAt": {
+      "$date": {
+        "$numberLong": "1670967784243"
+      }
+    },
+    "text": "lotfy please clean the table"
+  },
+  {
+    "_id": "6398f22334f17419013b9550",
+    "fromID": "t2_nabil",
+    "toID": "t2_lotfy2",
+    "isDeleted": false,
+    "unread_status": true,
+    "subject": "order message",
+    "createdAt": {
+      "$date": {
+        "$numberLong": "1670967784243"
+      }
+    },
+    "text": "and please go to kitchen"
+  },
+  {
+    "_id": "6398f24134f17419013b9556",
+    "fromID": "t2_hamada",
+    "toID": "t2_lotfy2",
+    "isDeleted": true,
+    "unread_status": true,
+    "subject": "order message",
+    "createdAt": {
+      "$date": {
+        "$numberLong": "1670967784243"
+      }
+    },
+    "text": "after doing what nabil said please go to your bed"
+  },
+  {
+    "_id": "63a0b44c795a7b8b6f8f0a09",
+    "fromID": "t2_moazMohamed",
+    "toID": "t2_AbdelrahmanHamza",
+    "isDeleted": false,
+    "unread_status": true,
+    "subject": "Test",
+    "createdAt": {
+      "$date": {
+        "$numberLong": "1671475974002"
+      }
+    },
+    "text": "Test"
+  },
+  {
+    "_id": "63a0b92bf689733bd33f13b4",
+    "fromID": "t2_AbdelrahmanHamza",
+    "toID": "t2_moazMohamed",
+    "isDeleted": false,
+    "unread_status": true,
+    "subject": "moazMohamed moazMohamed",
+    "createdAt": {
+      "$date": {
+        "$numberLong": "1671477546085"
+      }
+    },
+    "text": "moazMohamedmoazMohamedmoazMohamed"
+  },
+  {
+    "_id": "63a0bf7f817aae3e4697e06a",
+    "fromID": "t2_moazMohamed",
+    "toID": "t2_AbdelrahmanHamza",
+    "isDeleted": false,
+    "unread_status": true,
+    "subject": "Reply to AbdelrahmanHamza's Message",
+    "createdAt": {
+      "$date": {
+        "$numberLong": "1671478905552"
+      }
+    },
+    "text": "Test"
+  },
+  {
+    "_id": "63a0bfa6817aae3e4697f365",
+    "fromID": "t2_moazMohamed",
+    "toID": "t2_AbdelrahmanHamza",
+    "isDeleted": false,
+    "unread_status": true,
+    "subject": "Reply to AbdelrahmanHamza's Message",
+    "createdAt": {
+      "$date": {
+        "$numberLong": "1671478905552"
+      }
+    },
+    "text": "Test Reply Prompt"
+  },
+  {
+    "_id": "63a0c026817aae3e4698046b",
+    "fromID": "t2_moazMohamed",
+    "toID": "t2_AbdelrahmanHamza",
+    "isDeleted": false,
+    "unread_status": true,
+    "subject": "Reply to AbdelrahmanHamza's Message",
+    "createdAt": {
+      "$date": {
+        "$numberLong": "1671478905552"
+      }
+    },
+    "text": "Test further"
+  },
+  {
+    "_id": "63a0c054817aae3e46980d72",
+    "fromID": "t2_moazMohamed",
+    "toID": "t2_AbdelrahmanHamza",
+    "isDeleted": false,
+    "unread_status": true,
+    "subject": "Reply to AbdelrahmanHamza's Message",
+    "createdAt": {
+      "$date": {
+        "$numberLong": "1671478905552"
+      }
+    },
+    "text": "Toggle"
+  },
+  {
+    "_id": "63a0d8471d7808816fbd5abd",
+    "fromID": "t2_moazMohamed",
+    "toID": "t2_jan_116",
+    "isDeleted": false,
+    "unread_status": true,
+    "subject": "Khaled",
+    "createdAt": {
+      "$date": {
+        "$numberLong": "1671485475382"
+      }
+    },
+    "text": "Khaled"
+  },
+  {
+    "_id": "63a0d988d03e1bc1c741ebb1",
+    "fromID": "t2_moazMohamed",
+    "toID": "t2_jan_116",
+    "isDeleted": false,
+    "unread_status": true,
+    "subject": "Khaled",
+    "createdAt": {
+      "$date": {
+        "$numberLong": "1671485794733"
+      }
+    },
+    "text": "Khaled"
+  }
+]

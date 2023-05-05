@@ -1,0 +1,19 @@
+FROM node:lts-alpine
+
+WORKDIR /app
+
+COPY package.json .
+
+COPY package-lock.json .
+
+RUN apk add --update --no-cache python3 build-base gcc && ln -sf /usr/bin/python3 /usr/bin/python
+
+RUN npm install -g npm@9.2.0
+
+RUN npm install
+
+COPY . .
+
+EXPOSE 8000
+
+CMD ["node", "server.js"]
