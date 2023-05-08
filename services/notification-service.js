@@ -65,19 +65,21 @@ class NotificationService extends Service {
     await notification.save();
   };
   /**
-   *Creates follower notification
-   * @param {Object} notification
+   *Creates new offer notification
+   * @param {Object} offer
+   * @param {Object} avatar
    * @return {Object} state
    * @function
    */
-  createFollowerNotification = async (transmitter, avatar) => {
+  createOfferNotification = async (offer, avatar,dstPhoneNumber) => {
     const notification = {
-      userIcon: avatar,
-      title: "You have a new follower",
-      type: "newFollower",
-      text: "u/" + `${transmitter.slice(3)} has followed you`,
-      sourceThing: transmitter,
+      Icon: avatar,
+      title: "You have a new offer",
+      type: "newOffer",
+      text: `Hey, ${offer}`,
+      sourceThing: "Orange",
       createdAt: Date.now(),
+      dstUser:dstPhoneNumber
     };
     var not;
 
@@ -101,22 +103,23 @@ class NotificationService extends Service {
     };
   };
   /**
-   *Creates upvote to comment notification
+   *Creates Done payment notification
    * @param {String} senderUsername
    * @param {Object} user
    * @return {Object} state
    * @function
    */
-  createUpvoteToCommentNotification = async (senderUsername, user) => {
+  createDonePaymentNotification = async (paymentID,avatar,dstPhoneNumber) => {
     var notification;
 
     notification = {
-      userIcon: user.avatar,
-      title: "You have a new upvote",
-      type: "upvoteToYourComment",
-      text: "u/" + `${senderUsername.slice(3)} upvoted on your comment`,
-      sourceThing: senderUsername,
+      Icon: avatar,
+      title: "Done Payment",
+      type: "donePayment",
+      text: `Your payment with id ${paymentID} is done`,
+      sourceThing: "Orange",
       createdAt: Date.now(),
+      dstUser:dstPhoneNumber
     };
     var not;
 
@@ -139,128 +142,7 @@ class NotificationService extends Service {
       id: not._id,
     };
   };
-  /**
-   *Creates reply to post notification
-   * @param {String} senderUsername
-   * @param {Object} user
-   * @return {Object} state
-   * @function
-   */
-  createReplyToPostNotification = async (senderUsername, user) => {
-    var notification;
-
-    notification = {
-      userIcon: user.avatar,
-      title: "You have a new reply to your post",
-      type: "upvoteToYourComment",
-      text: "u/" + `${senderUsername.slice(3)} commented on your post`,
-      sourceThing: senderUsername,
-      createdAt: Date.now(),
-    };
-    var not;
-
-    try {
-      not = await this.insert(notification);
-    } catch (err) {
-      return {
-        status: false,
-        error: err,
-      };
-    }
-    if (!not) {
-      return {
-        status: false,
-        error: "error happened while inserting in db",
-      };
-    }
-    return {
-      status: true,
-      id: not._id,
-    };
-  };
-
-  /**
-   *Creates reply to comment notification
-   * @param {String} senderUsername
-   * @param {Object} user
-   * @return {Object} state
-   * @function
-   */
-  createReplyToCommentNotification = async (senderUsername, user) => {
-    var notification;
-
-    notification = {
-      userIcon: user.avatar,
-      title: "You have a new reply to your comment",
-      type: "upvoteToYourComment",
-      text: "u/" + `${senderUsername.slice(3)} replied on your comment`,
-      sourceThing: senderUsername,
-      createdAt: Date.now(),
-    };
-    var not;
-
-    try {
-      not = await this.insert(notification);
-    } catch (err) {
-      return {
-        status: false,
-        error: err,
-      };
-    }
-    if (!not) {
-      return {
-        status: false,
-        error: "error happened while inserting in db",
-      };
-    }
-    return {
-      status: true,
-      id: not._id,
-    };
-  };
-
-  /**
-   *Creates upvote to post notification
-   * @param {String} senderUsername
-   * @param {Object} user
-   * @return {Object} state
-   * @function
-   */
-  createUpvoteToPostNotification = async (senderUsername, user) => {
-    var notification;
-
-    notification = {
-      userIcon: user.avatar,
-      title: "You have a new upvote",
-      type: "upvoteToYourPost",
-      text: "u/" + `${senderUsername.slice(3)} upvoted on your post`,
-      sourceThing: senderUsername,
-      createdAt: Date.now(),
-      isRead: false,
-      isDeleted: false,
-    };
-    var not;
-
-    try {
-      not = await this.insert(notification);
-    } catch (err) {
-      return {
-        status: false,
-        error: err,
-      };
-    }
-    if (!not) {
-      return {
-        status: false,
-        error: "error happened while inserting in db",
-      };
-    }
-    return {
-      status: true,
-      id: not._id,
-    };
-  };
-
+  
   deleteOrMarkReadUserNotification = async (notificationID, user, type) => {
     if (!notificationID)
       throw new AppError("No notification id is provided!", 400);

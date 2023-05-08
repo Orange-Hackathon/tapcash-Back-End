@@ -15,7 +15,7 @@ const getNotifications = catchAsync(async (req, res, next) => {
   var notifications = undefined;
   try {
     const user = await userServiceInstance.getOne({
-      _id: req.username,
+      _id: req.phoneNumber,
       select: "notifications",
     });
     notifications = await notificationServiceInstance.getNotifications(
