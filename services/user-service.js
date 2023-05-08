@@ -57,7 +57,8 @@ class UserService extends Service {
         balance: user.balance,
         avatar: user.avatar,
         email: user.email,
-        
+        firstName: user.firstName,
+        lastName: user.lastName
       },
     };
   };
