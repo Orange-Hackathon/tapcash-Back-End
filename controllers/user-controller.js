@@ -20,6 +20,79 @@ const commentServiceInstance = new CommentService(Comment);
 const notificationServiceInstance = new NotificationService(Notification);
 var pushNotificationServiceInstance = new PushNotificationService();
 
+
+/**
+ * Transfer money to a user 
+ * @param {function} (req, res)
+ * @returns {object} res
+ */
+const transferMoney=async(req,res)=>{
+  if(!req.body.receiverPhoneNumber||!req.body.amount){
+    return res.status(500).json({
+      response: "error providing receiver Phone Number or amount",
+    });
+  }
+  const result = await userServiceInstance.transferMoney(req.phoneNumber,req.body.receiverPhoneNumber,req.body.amount);
+  if (!result.status) {
+    return res.status(500).json({
+      status: "operation failed",
+    });
+  }
+  return res.status(200).json({
+    response: "done",
+  });
+}
+/**
+ * Retrive bills of a user 
+ * @param {function} (req, res)
+ * @returns {object} res
+ */
+const getBills=async(req,res)=>{
+  if(!req.phoneNumber){
+    return res.status(500).json({
+      response: "error providing phone number",
+    });
+  }
+  const result = await userServiceInstance.getBills(req.phoneNumber);
+  if (!result.status) {
+    return res.status(500).json({
+      status: "operation failed",
+    });
+  }
+  return res.status(200).json({
+    response: "done",
+    bills:result.bills
+  });
+
+}
+/**
+ * Get info of user according to its type 
+ * @param {function} (req, res)
+ * @returns {object} res
+ */
+const getInfo=async(req,res)=>{
+  if(!req.phoneNumber){
+    return res.status(500).json({
+      response: "error providing phone number",
+    });
+  }
+  const result = await userServiceInstance.getInfo(req.phoneNumber);
+  if (!result.status) {
+    return res.status(500).json({
+      status: "operation failed",
+    });
+  }
+  return res.status(200).json({
+    response: "done",
+    info:result.info
+  });
+
+}
+
+
+
+
+
 /**
  * Get user followers
  * @param {function} (req, res)
@@ -762,4 +835,7 @@ module.exports = {
   addInterests,
   getUserInfo,
   editProfile,
+  transferMoney,
+  getBills,
+  getInfo
 };

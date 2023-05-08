@@ -66,10 +66,10 @@ availablePhoneNumber = async (phoneNumber) => {
    * @returns {String} (signed token)
    * @function
    */
-  signToken = (emailType, username) => {
+  signToken = (phoneNumber) => {
     const res = jwt.sign(
-      { emailType: emailType, username: username },
-      "mozaisSoHotButNabilisTheHottest",
+      { phoneNumber: phoneNumber },
+      "orangeHackathon",
       { expiresIn: "120h" }
     );
 
@@ -101,13 +101,14 @@ availablePhoneNumber = async (phoneNumber) => {
           error: "Wrong PIN",
         };
       }
-      const token = await this.signToken(body.type, body.username);
+      const token = await this.signToken(body.phoneNumber);
       return {
         state: true,
         error: null,
         token: token, //token,
         expiresIn: 3600 * 24,
         phoneNumber: body.phoneNumber,
+        type:user.type
       };
     }
 
@@ -124,13 +125,15 @@ availablePhoneNumber = async (phoneNumber) => {
 
   signup = async (body) => {
     const hash = await bcrypt.hash(body.PIN, 10);
-
+  
          const result = await this.createUser(
         body.phoneNumber,
         body.firstName,
         body.lastName,
         body.email,
+        
         hash
+        ,body.type
       );
       if (result.phoneNumber != null) {
          return {
@@ -173,14 +176,19 @@ availablePhoneNumber = async (phoneNumber) => {
    * @returns {object} (status,username)
    * @function
    */
-  createUser = async (phoneNumber, firstName, lastName,email, PIN) => {
+  createUser = async (phoneNumber, firstName, lastName,email, PIN,type) => {
     const user = new User({
       phoneNumber: phoneNumber,
       firstName: firstName,
       lastName: lastName,
       email:email,
       PIN: PIN,
+      _id:phoneNumber,
+      type:type,
+      sons:(type=="parent"?[]:null)
        });
+
+       console.log(user)
     const result = user
       .save()
       .then(() => {
@@ -190,6 +198,7 @@ availablePhoneNumber = async (phoneNumber) => {
         };
       })
       .catch((err) => {
+        console.log(err);
         return {
           phoneNumber: null,
           status: "error",

@@ -33,6 +33,99 @@ class UserService extends Service {
       { expiresIn: "120h" }
     );
   };
+
+  /**
+   * Get info of a user
+   * @param {String} phoneNumber user's phone number.
+   * @returns {Object} (status)
+   * @function
+   */
+  getInfo = async (phoneNumber) => {
+    const user = await this.getOne({ phoneNumber: phoneNumber });
+    if (!user) {
+      return {
+
+        status: false,
+        error: "invalid phone number",
+      };
+    }
+    return {
+      status: true,
+
+      user: {
+        phoneNumber: user.phoneNumber,
+        balance: user.balance,
+        avatar: user.avatar,
+        email: user.email,
+        
+      },
+    };
+  };
+
+
+
+  /**
+   * Retreive bills of a user
+   * @param {String} phoneNumber user's phone number.
+   * @returns {Object} (status)
+   * @function
+   */
+  getBills = async (phoneNumber) => {
+    const user = await this.getOne({ phoneNumber: phoneNumber });
+    if (!user) {
+      return {
+        status: false,
+        error: "invalid phone number",
+      };
+    }
+    return {
+      status: true,
+      bills: user.bills,
+    };
+  };
+
+/**
+   * Transfer money to a user
+   * @param {String} senderphoneNumber sender phone number.
+   * @param {String} receiverPhoneNumber receiver phone number.
+   * @param {String} amount amount of money.
+   * @returns {Object} (status)
+   * @function
+   */
+  transferMoney = async (senderphoneNumber, receiverPhoneNumber, amount) => {
+    console.log(senderphoneNumber, receiverPhoneNumber, amount);
+    const sender = await this.getOne({ phoneNumber: senderphoneNumber });
+    const receiver = await this.getOne({ phoneNumber: receiverPhoneNumber });
+    if (!sender || !receiver) {
+      return {
+        status: false,
+        error: "invalid phone number",
+      };
+    }
+    if (sender.balance < amount) {
+      return {
+        status: false,
+        error: "insufficient balance",
+      };
+    }
+    try {
+      sender.balance -= amount;
+      receiver.balance += amount;
+      await sender.save();
+      await receiver.save();
+    } catch (err) {
+      return {
+        status: false,
+        error: "error",
+      };
+    }
+    return {
+      status: true,
+    };
+  };
+
+
+
   /**
    * Saving notification in user's document
    * @param {String} id notification id.

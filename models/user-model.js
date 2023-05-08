@@ -215,7 +215,48 @@ const userSchema = new mongoose.Schema({
     minLength: [5, "the minimum length is 5 characters"],
     maxLength: [20, "the maximum length is 20"],
   },
- 
+  firstName: {
+    type: String,
+    required: [true, "Please provide your first name"],
+    minLength: [3, "the minimum length is 3 characters"],
+    maxLength: [20, "the maximum length is 20"],
+  },
+  lastName: {
+    type: String,
+    required: [true, "Please provide your last name"],
+    minLength: [3, "the minimum length is 3 characters"],
+    maxLength: [20, "the maximum length is 20"],
+  },
+  bills:[
+    {
+      type: mongoose.Schema.ObjectId,
+      ref: "Bill",
+    },
+  ],
+  type:{
+    type:String,
+  },
+  restrictedCategories: [
+    {
+      type: String,
+    },
+  ],
+  totalSpent:{
+    type:Number,
+  },
+  allowance:{
+    type:Number,
+  },
+
+  sons:[
+    {
+      type: mongoose.Schema.ObjectId,
+      ref: "User",
+    },
+  ],
+
+
+
   canCreateSubreddit: {
     type: Boolean,
     default: true,
@@ -252,11 +293,7 @@ const userSchema = new mongoose.Schema({
   },
   
   PIN: {
-    type: String,
-    
-    minLength: [4, "the minimum length of PIN is 4"],
-    maxLength: [4, "the max length of the PIN is 4"],
-    /*we didn't put required field due to google and facebook signing in*/
+    type: Number,
   },
  
 

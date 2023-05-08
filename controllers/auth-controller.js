@@ -91,6 +91,7 @@ const login = async (req, res) => {
       token: result.token, //token,
       expiresIn: result.expiresIn,
       phoneNumber: result.phoneNumber,
+      type: result.type,
     });
   } else {
     return res.status(404).json({

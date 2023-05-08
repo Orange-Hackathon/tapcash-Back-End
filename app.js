@@ -97,9 +97,9 @@ app.use("/", limiter); // limit only api requests
 app.use(express.json({ limit: "10kb" }));
 
 // ROUTES
-// app.use("/api/auth", authRouter);
+ app.use("/api/auth", authRouter);
 // app.use("/api/message", messageRouter);
-// app.use("/api/user", userRouter);
+ app.use("/api/user", userRouter);
 // app.use("/api/r", communityRouter);
 // app.use("/api/listing", listingRouter);
 // app.use("/api/search", searchRouter);

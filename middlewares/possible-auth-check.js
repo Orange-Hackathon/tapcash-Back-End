@@ -12,7 +12,7 @@ module.exports = (req, res, next) => {
     try {
         if (req.headers.authorization) {
             const token = req.headers.authorization.split(" ")[1];
-            const decoded = jwt.verify(token, "mozaisSoHotButNabilisTheHottest");
+            const decoded = jwt.verify(token, "orangeHackathon");
             req.username = decoded.username;
             next();
         } else {
