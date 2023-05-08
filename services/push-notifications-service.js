@@ -36,7 +36,7 @@ class PushNotificationsService {
     };
   };
   /**
-   * Send new follower notification using firebase
+   * Send new offer notification using firebase
    * @param {String} receiverFcmToken notification receiver firebase token.
    * @param {String} paymentID payment id.
    * @returns {Boolean} status.

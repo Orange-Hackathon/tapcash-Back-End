@@ -9,39 +9,6 @@ const UserService = require("./../services/user-service");
 
 const userServiceInstance = new UserService(User);
 
-// /**
-//  * Check whether google account or facebook account is in database or not (route)
-//  * @param {Object} req request that contain email and type.
-//  * @returns {String} response whether available or not.
-//  */
-// const availableGorF = async (req, res) => {
-//   const data = await availabeGmailOrFacebook(req.body.email, req.body.type);
-//   if (data.exist == false) {
-//     return res.status(200).json({
-//       response: "Avaliable",
-//     });
-//   } else {
-//     return res.status(404).json({
-//       response: "Not Avaliable",
-//     });
-//   }
-// };
-
-/**
- * Check whether username is in database or not (route)
- * @param {Object} req request that contains the username.
- * @param {Object} res
- * @returns {object} response whether available or not.
- */
-const availableUsername = async (req, res) => {
-  const data = await authServiceInstance.availableUser(req.query.username);
-  if (data.state) {
-    return res.status(200).json({ response: "Available" });
-  } else {
-    return res.status(404).json({ response: "Not Available" });
-  }
-};
-
 /**
  * Check whether phoneNumber is in database or not (route)
  * @param {Object} req request that contains the username.
@@ -100,21 +67,10 @@ const login = async (req, res) => {
   }
 };
 
-const forgotPassword = catchAsync(async (req, res, next) => {
-  if (req.body.operation) {
-    // in case of forgot username
-    try {
-      await userServiceInstance.forgotUsername(req.body.email);
-    } catch (err) {
-      return next(err);
-    }
-    return res.status(200).json({
-      status: "success",
-      message: "Username is sent to the email!",
-    });
-  }
+const forgotPIN = catchAsync(async (req, res, next) => {
+  
   try {
-    await userServiceInstance.forgotPassword(req.body.username);
+    await userServiceInstance.forgotPIN(req.body.phoneNumber);
   } catch (err) {
     return next(err);
   }
@@ -124,46 +80,28 @@ const forgotPassword = catchAsync(async (req, res, next) => {
   });
 });
 
-const resetForgottenPassword = catchAsync(async (req, res, next) => {
-  var data = undefined;
+const resetUserPIN = catchAsync(async (req, res, next) => {
   try {
-    data = await userServiceInstance.resetForgottenPassword(
-      req.params.token,
-      req.body.newPassword,
-      req.body.confirmedNewPassword
-    );
-  } catch (err) {
-    return next(err);
-  }
-  return res.status(200).json({
-    token: data.token,
-    expiresIn: 3600 * 24,
-    username: data.id,
-  });
-});
-const resetUserPassword = catchAsync(async (req, res, next) => {
-  try {
-    await authServiceInstance.resetPassword(
+    await authServiceInstance.resetPIN(
       req.username,
-      req.body.currentPassword,
-      req.body.newPassword,
-      req.body.confirmNewPassword
+      req.body.currentPIN,
+      req.body.newPIN,
+      req.body.confirmNewPIN
     );
   } catch (err) {
     return next(err);
   }
   return res.status(200).json({
     status: "success",
-    message: "Password is reset",
+    message: "PIN is reset",
   });
 });
 
 module.exports = {
-  availableUsername,
+  
   signup,
   login,
-  forgotPassword,
-  resetForgottenPassword,
-  resetUserPassword,
+  forgotPIN,
+  resetUserPIN,
   availablePhoneNumber
 };

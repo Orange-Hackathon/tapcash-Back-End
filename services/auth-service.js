@@ -88,7 +88,7 @@ availablePhoneNumber = async (phoneNumber) => {
       if (!user) {
         return {
           state: false,
-          error: "Wrong username or password",
+          error: "Wrong username or PIN",
         };
       }
       const compareResult = await bcrypt.compareSync(
@@ -170,7 +170,7 @@ availablePhoneNumber = async (phoneNumber) => {
   /**
    * Save user in database
    * @param {String} email email of the user
-   * @param {String} hash hashed password
+   * @param {String} hash hashed PIN
    * @param {String} username username of the user
    * @param {String} type type of the email
    * @returns {object} (status,username)
@@ -240,27 +240,27 @@ availablePhoneNumber = async (phoneNumber) => {
     return type == "facebook" || type == "gmail" ? "1" : password;
   };
   /**
-   * Resets user password
+   * Resets user PIN
    *  @param {string} username
-   * @param {string} currentPassword
-   * @param {string} newPassword
-   * @param {string} confirmedNewPassword
+   * @param {string} currentPIN
+   * @param {string} newPIN
+   * @param {string} confirmedNewPIN
    * @function
    */
-  resetPassword = async (
-    username,
-    currentPassword,
-    newPassword,
-    confirmedNewPassword
+  resetPIN = async (
+    phoneNumber,
+    currentPIN,
+    newPIN,
+    confirmedNewPIN
   ) => {
-    const user = await this.getOne({ _id: username });
+    const user = await this.getOne({ _id: phoneNumber });
     if (!user) throw new AppError("user is invalid or expired!", 400);
-    if (confirmedNewPassword !== newPassword)
-      throw new AppError("Password is not equal to confirmed password!", 400);
-    const result = await bcrypt.compareSync(currentPassword, user.password);
-    if (!result) throw new AppError("this password is not correct!", 400);
-    const hash = await bcrypt.hash(newPassword, 10);
-    user.password = hash;
+    if (confirmedNewPIN !== newPIN)
+      throw new AppError("PIN is not equal to confirmed PIN!", 400);
+    const result = await bcrypt.compareSync(currentPIN, user.PIN);
+    if (!result) throw new AppError("this PIN is not correct!", 400);
+    const hash = await bcrypt.hash(newPIN, 10);
+    user.PIN = hash;
     await user.save();
   };
 }

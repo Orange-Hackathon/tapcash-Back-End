@@ -620,20 +620,20 @@ class UserService extends Service {
 
   /**
    * Sends reset link to specified user by email
-   * @param {string} username
+   * @param {string} phoneNumber
    * @function
    */
-  forgotPassword = async (username) => {
-    const user = await this.getOne({ _id: username });
+  forgotPIN = async (phoneNumber) => {
+    const user = await this.getOne({ _id: phoneNumber });
     if (!user) {
-      throw new AppError("There is no user with this username!", 404);
+      throw new AppError("There is no user with this phone number!", 404);
     }
     // Generate the random reset token
     const resetToken = await user.createPasswordResetToken();
     await user.save({ validateBeforeSave: false }); // in order to save the passwordResetToken and passwordResetExpires
     // Send the reset token to the user email
     try {
-      const reqURL = `http://dev.redditswe22.tech/user/reset-password/${resetToken}`;
+      const reqURL = `https://backend-veoy.onrender.com/user/reset-password/${resetToken}`;
       await new Email(user, reqURL).sendPasswordReset();
     } catch (err) {
       user.passwordResetToken = undefined;
