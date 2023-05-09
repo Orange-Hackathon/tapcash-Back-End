@@ -66,7 +66,7 @@ const getBills=async(req,res)=>{
 
 }
 /**
- * Get info of user according to its type 
+ * Get info of a user  
  * @param {function} (req, res)
  * @returns {object} res
  */
@@ -89,6 +89,50 @@ const getInfo=async(req,res)=>{
 
 }
 
+/**
+ * Pay a bill of a user
+ * @param {function} (req, res)
+ * @returns {object} res
+ */
+const payBill=async(req,res)=>{
+  if(!req.body.billID){
+    return res.status(500).json({
+      response: "error providing bill ID",
+    });
+  }
+  const result = await userServiceInstance.payBill(req.phoneNumber,req.body.billID);
+  if (!result.status) {
+    return res.status(500).json({
+      status: "operation failed",
+    });
+  }
+  return res.status(200).json({
+    response: "done",
+  });
+
+}
+/**
+ * Add restricted category to a user
+ * @param {function} (req, res)
+ * @returns {object} res
+ */
+const addRestrictedCategory=async(req,res)=>{
+  if(!req.body.category){
+    return res.status(500).json({
+      response: "error providing category",
+    });
+  }
+  const result = await userServiceInstance.addRestrictedCategory(req.phoneNumber,req.body.childPhoneNumber,req.body.category);
+  if (!result.status) {
+    return res.status(500).json({
+      status: "operation failed",
+    });
+  }
+  return res.status(200).json({
+    response: "done",
+  });
+  
+}
 
 
 
@@ -837,5 +881,7 @@ module.exports = {
   editProfile,
   transferMoney,
   getBills,
-  getInfo
+  getInfo,
+  payBill,
+  addRestrictedCategory
 };

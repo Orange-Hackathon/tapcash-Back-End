@@ -7,6 +7,7 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/user-model");
 const Community = require("../models/community-model");
 const AuthService = require("./../services/auth-service");
+const Bill = require("../models/bill-model");
 var authServiceInstance = new AuthService(User);
 const CommunityService = require("./../services/community-service");
 var communityServiceInstance = new CommunityService(Community);
@@ -124,6 +125,96 @@ class UserService extends Service {
       status: true,
     };
   };
+  /**
+   * Pay a bill for a user
+   * @param {String} billID bill id.
+   * @param {String} phoneNumber phone number of the user.
+   * @returns {Object} (status)
+   * @function
+   */
+  payBill = async (phoneNumber,billID) => {
+    const user = await this.getOne({ phoneNumber: phoneNumber });
+    if (!user) {
+      return {
+        status: false,
+        error: "invalid phone number",
+      };
+    }
+    const bill = user.bills.find((el) => el._id == billID);
+    if (!bill) {
+      return {
+        status: false,
+        error: "invalid bill id",
+      };
+    }
+    if (bill.isPaid) {
+      return {
+        status: false,
+        error: "bill is already paid",
+      };
+    }
+    if (user.balance < bill.amount) {
+      return {
+        status: false,
+        error: "insufficient balance",
+      };
+    }
+    try {
+      user.balance -= bill.amount;
+      bill.isPaid = true;
+      billDoc=Bill.getOne({_id:billID});
+      billDoc.isPaid=true;
+
+      await billDoc.save();
+      await user.save();
+    } catch (err) {
+      return {
+        status: false,
+        error: "error",};
+    }
+    return {
+      status: true,
+    };
+  };
+  /**
+   * Add restriced category to a child from parent
+   * @param {String} phoneNumber phone number of the parent.
+   * @param {String} childPhoneNumber phone number of the child.
+   * @param {String} category restricted category.
+   * @returns {Object} (status)
+   * @function
+   */
+  addRestrictedCategory = async ( phoneNumber, childPhoneNumber, category) => {
+    const parent = await this.getOne({ phoneNumber: phoneNumber });
+    const child = await this.getOne({ phoneNumber: childPhoneNumber });
+    if (!parent || !child) {
+      return {
+        status: false,
+        error: "invalid phone number",
+      };
+    }
+    if (child.restrictedCategories.indexOf(category) != -1) {
+      return {
+        status: false,
+        error: "category is already restricted",
+      };
+    }
+    try {
+      child.restrictedCategories.push(category);
+      await child.save();
+    } catch (err) {
+      return {
+        status: false,
+        error: "error",
+      };
+    }
+    return {
+      status: true,
+    };
+  };
+
+
+  
 
 
 

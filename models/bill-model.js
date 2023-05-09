@@ -2,11 +2,18 @@ const mongoose = require("mongoose");
 
 
 const billSchema = mongoose.Schema({
+    _id: {
+        type: String,
+      },
     billName: String,
     billAmount: Number,
     billDate: Date,
     billType: String,
-    billStatus: String,
+    isPaid: {
+        type: Boolean,
+        default: false,
+
+    },
     billDescription: String,
     billUser: {
         type: mongoose.Schema.Types.ObjectId,

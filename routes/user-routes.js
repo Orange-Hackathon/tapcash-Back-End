@@ -24,6 +24,9 @@ router.get("/me/following", authCheck, userController.following);
 router.get("/me/interests", authCheck, userController.getInterests);
 router.post("/me/interests", authCheck, userController.addInterests);
 router.post("/transfer-money", authCheck, userController.transferMoney);
+router.post("/pay-bill", authCheck, userController.payBill);
+router.post("/add-restricted-category", authCheck, userController.addRestrictedCategory);
+router.get("/get-info",authCheck,userController.getInfo);
 router.post("/block-user", authCheck, userController.block);
 router.post("/spam", authCheck, userController.spam);
 
