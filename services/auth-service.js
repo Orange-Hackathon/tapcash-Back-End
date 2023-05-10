@@ -133,7 +133,8 @@ availablePhoneNumber = async (phoneNumber) => {
         body.email,
         
         hash
-        ,body.type
+        ,body.type,
+        body.parentPhoneNumber
       );
       if (result.phoneNumber != null) {
          return {
@@ -176,7 +177,7 @@ availablePhoneNumber = async (phoneNumber) => {
    * @returns {object} (status,username)
    * @function
    */
-  createUser = async (phoneNumber, firstName, lastName,email, PIN,type) => {
+  createUser = async (phoneNumber, firstName, lastName,email, PIN,type,parentPhoneNumber) => {
     const user = new User({
       phoneNumber: phoneNumber,
       firstName: firstName,
@@ -185,10 +186,11 @@ availablePhoneNumber = async (phoneNumber) => {
       PIN: PIN,
       _id:phoneNumber,
       type:type,
-      sons:(type=="parent"?[]:null)
+      sons:(type=="parent"?[]:null),
+      parent:(type=="parent"?null:parentPhoneNumber)
        });
 
-       console.log(user)
+      
     const result = user
       .save()
       .then(() => {

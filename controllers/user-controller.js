@@ -133,7 +133,76 @@ const addRestrictedCategory=async(req,res)=>{
   });
   
 }
+/**
+ * Add a son to a user
+ * @param {function} (req, res)
+ * @returns {object} res
+ */
+const addSon=async(req,res)=>{
+  if(!req.body.childPhoneNumber){
+    return res.status(500).json({
+      response: "error providing child phone number",
+    });
+  }
+  const result = await userServiceInstance.addSon(req.phoneNumber,req.body.childPhoneNumber);
+  if (!result.status) {
+    return res.status(500).json({
+      status: "operation failed",
+    });
+  }
+  return res.status(200).json({
+    response: "done",
+  });
 
+}
+/**
+ * Get child info
+ * @param {function} (req, res)
+ * @returns {object} res
+ */
+const getChildInfo=async(req,res)=>{
+  if(!req.body.childPhoneNumber){
+    return res.status(500).json({
+      response: "error providing child phone number",
+    });
+  }
+  const result = await userServiceInstance.getChildInfo(req.phoneNumber,req.body.childPhoneNumber);
+  if (!result.status) {
+    return res.status(500).json({
+      status: "operation failed",
+    });
+  }
+  return res.status(200).json({
+    response: "done",
+    info:result.info
+  });
+
+}
+
+/**
+ * Get transactions of a user
+ * @param {function} (req, res)
+ * @returns {object} res
+ */
+const getTransactions=async(req,res)=>{
+  if(!req.phoneNumber){
+    return res.status(500).json({
+      response: "error providing phone number",
+    });
+  }
+
+  const result = await userServiceInstance.getTransactions(req.phoneNumber);
+  if (!result.status) {
+    return res.status(500).json({
+      status: "operation failed",
+    });
+  }
+  return res.status(200).json({
+    response: "done",
+    transactions:result.transactions
+  });
+
+}
 
 
 
@@ -883,5 +952,8 @@ module.exports = {
   getBills,
   getInfo,
   payBill,
-  addRestrictedCategory
+  addRestrictedCategory,
+  addSon,
+  getChildInfo,
+  getTransactions
 };

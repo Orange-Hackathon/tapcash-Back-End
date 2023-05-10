@@ -254,6 +254,11 @@ const userSchema = new mongoose.Schema({
       ref: "User",
     },
   ],
+  parent:{
+    type: mongoose.Schema.ObjectId,
+    ref: "User",
+  },
+
 
 
 
@@ -302,6 +307,15 @@ const userSchema = new mongoose.Schema({
     enum: ["bare email", "facebook", "gmail"],
     default: "bare email",
   },
+  
+  transactions: [
+    {
+      type: mongoose.Schema.ObjectId,
+      ref: "Transaction",
+    },
+  ],
+
+
   /*********************************************************************************
    * the relations
    **********************************************************************************/

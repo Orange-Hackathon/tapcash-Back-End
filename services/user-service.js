@@ -8,6 +8,7 @@ const User = require("../models/user-model");
 const Community = require("../models/community-model");
 const AuthService = require("./../services/auth-service");
 const Bill = require("../models/bill-model");
+const HistoryTransaction =require("../models/history-transaction-model");
 var authServiceInstance = new AuthService(User);
 const CommunityService = require("./../services/community-service");
 var communityServiceInstance = new CommunityService(Community);
@@ -113,6 +114,16 @@ class UserService extends Service {
     try {
       sender.balance -= amount;
       receiver.balance += amount;
+      const transaction=new HistoryTransaction({
+        fromID:sender._id,
+        toID:receiver._id,
+        amount:amount,
+        type:"Transfer",
+      });
+      sender.transactions.push(transaction);
+      receiver.transactions.push(transaction);
+      
+      await transaction.save();
       await sender.save();
       await receiver.save();
     } catch (err) {
@@ -215,6 +226,141 @@ class UserService extends Service {
 
 
   
+  /**
+   * Remove restriced category from a child
+   * @param {String} phoneNumber phone number of the parent.
+   * @param {String} childPhoneNumber phone number of the child.
+   * @param {String} category restricted category.
+   * @returns {Object} (status)
+   * @function
+   */
+  removeRestrictedCategory = async (phoneNumber, childPhoneNumber, category) => {
+    const parent = await this.getOne({ phoneNumber: phoneNumber });
+    const child = await this.getOne({ phoneNumber: childPhoneNumber });
+    if (!parent || !child) {
+      return {
+        status: false,
+        error: "invalid phone number",
+      };
+    }
+    if (child.restrictedCategories.indexOf(category) == -1) {
+      return {
+        status: false,
+
+        error: "category is already not restricted",
+      };
+    }
+    try {
+      child.restrictedCategories.splice(
+        child.restrictedCategories.indexOf(category),
+        1
+      );
+      await child.save();
+    } catch (err) {
+      return {
+        status: false,
+        error: "error",
+      };
+    }
+    return {
+      status: true,
+    };
+  };
+   /**
+   * Add child to parent
+   * @param {String} phoneNumber phone number of the parent.
+   * @param {String} childPhoneNumber phone number of the child.
+   * @returns {Object} (status)
+   * @function
+   */
+  addSon = async (phoneNumber, childPhoneNumber) => {
+    const parent = await this.getOne({ phoneNumber: phoneNumber });
+    const child = await this.getOne({ phoneNumber: childPhoneNumber });
+    if (!parent || !child) {
+      return {
+        status: false,
+        error: "invalid phone number",
+      };
+    }
+    if (child.parent!=phoneNumber) {
+      return {
+        status: false,
+        error: "this isn't the parent of this child",
+      };
+    }
+    try {
+      parent.sons.push(childPhoneNumber);
+      await parent.save();
+    } catch (err) {
+      return {
+        status: false,
+        error: "error",
+
+      };
+    }
+    return {
+      status: true,
+    };
+  };
+   /**
+   * Get child info
+   * @param {String} phoneNumber phone number of the parent.
+   * @param {String} childPhoneNumber phone number of the child.
+   * @returns {Object} (status)
+   * @function
+   */
+  getChildInfo = async (phoneNumber, childPhoneNumber) => {
+    const parent = await this.getOne({ phoneNumber: phoneNumber });
+    const child = await this.getOne({ phoneNumber: childPhoneNumber });
+    if (!parent || !child) {
+      return {
+        status: false,
+        error: "invalid phone number",
+      };
+    }
+    if (child.parent!=phoneNumber) {
+      return {
+        status: false,
+
+        error: "this isn't the parent of this child",
+
+      };
+    }
+    return {
+      status: true,
+      info: {
+        phoneNumber: child.phoneNumber,
+        totalSpent: child.totalSpent,
+        allowance: child.allowance,
+        balance: child.balance,
+        avatar: child.avatar,
+        email: child.email,
+        firstName: child.firstName,
+        lastName: child.lastName,
+        restrictedCategories: child.restrictedCategories,
+      },
+    };
+  };
+
+  /**
+   * Get transactions of a user
+   * @param {String} phoneNumber user's phone number.
+   * @returns {Object} (status)
+   * @function
+   */
+  getTransactions = async (phoneNumber) => {
+    const user = await this.getOne({ phoneNumber: phoneNumber });
+    if (!user) {
+      return {
+        status: false,
+        error: "invalid phone number",
+      };
+    }
+    return {
+      status: true,
+      transactions: user.transactions,
+    };
+  };
 
 
 

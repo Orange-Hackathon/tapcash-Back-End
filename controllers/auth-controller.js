@@ -67,6 +67,12 @@ const login = async (req, res) => {
   }
 };
 
+/**
+ * Forgot PIN (route)
+ * @param {Object} req req must contain the correct data.
+ * @param {Object} res
+ * @returns {object} {token,expiresIn,username} or {error}
+ */
 const forgotPIN = catchAsync(async (req, res, next) => {
   
   try {
@@ -80,6 +86,12 @@ const forgotPIN = catchAsync(async (req, res, next) => {
   });
 });
 
+/**
+ * Reset PIN (route)
+ * @param {Object} req req must contain the correct data.
+ * @param {Object} res
+ * @returns {object} {token,expiresIn,username} or {error}
+ */
 const resetUserPIN = catchAsync(async (req, res, next) => {
   try {
     await authServiceInstance.resetPIN(
