@@ -1,7 +1,7 @@
 
 <div align="center">
     <h1 align='center'>⚡️<i>Orange Hackathon</i>⚡️</h1>
-   <img src="/readmefiles/tapcash.jpg">
+   <img src="/readme files/tapcash.jpg">
 
 
 
@@ -15,10 +15,8 @@
  
 - [⛏️ Built With](#built-with)
 - [🏁 Getting started](#getting-started)
-- [🏁 Description](#Description)
 - [📷 Features](#features)
 - [🏁 API Documentation](#API-Documentation)
-- [🏁 Function Documentation](#Function-Documentation)
 - [✍️ Contributors](#contributors)
 - [🔒 License](#license)
 </details>
@@ -82,22 +80,6 @@
 
 </ol>
 <hr>
-<h2 href="#Description">Description</h2>
-<blockquote>
-  <p>
-  This website was implemented for Software Engineering Course 
-  by a a team of 19 student, distributed into multiple small teams, Backend, Frontend, Cross-Platform, DevOps, and Testing team.
-  <br>
-  <br>
-  It is a Clone of many features of Reddit website.
-  <br>
-  A social media website to enable good communication between users by creating posts with photos and markdown, communicating in public or priate subreddits (communities) with multiple categories, with user system and preferences 
-  <br>
-  <br>
-  This website is developed in React js for the frontend and in Node js for the backend using MongoDB for the database, Firebase for sending notifications, and Microsoft Azure for deployment.
- </p>
-</blockquote>
-<hr>
 <h2 href="#API-Documentation">API Documentation</h2>
 <blockquote>
   <p>
@@ -105,4 +87,70 @@
   </p>
 </blockquote>
 <hr>
+
+
+## 📷 Features
+
+<details>
+<summary>
+<h4 style="display:inline">
+<strong><em>🔒 User Authentication</em></strong></h4>
+</summary>
+
+- Sign up
+- Login in
+- Forget PIN
+
+<div align="center">
+ 
+   <img src="/readme files/Login.png">
+    <img src="/readme files/Sign up 1.png">
+    <img src="/readme files/reset PIN 1.png">
+
+</div>
+
+ 
+</details>
+
+<details>
+<summary>
+<h4 style="display:inline">
+<strong><em> 🙍‍♂️Transactions</em></strong></h4>
+</summary>
+
+- Send Money to friends
+- Payments
+- Bills
+
+    
+
+    
+ 
+    
+
+
+</details>
+
+
+
+
+<h2 href="#Contributors">Contributors</h2>
+
+
+<table>
+  <tr>
+
+<td align="center">
+<a href="https://github.com/AhmedLotfy02" target="_black">
+<img src="https://avatars.githubusercontent.com/u/76037906?v=4" width="150px;" alt="AhmedLotfy02"/><br /><sub><b>Ahmed Lotfy</b></sub></a><br />
+</td>
+
+
+</tr>
+
+</table>
+
+## 🔒 License <a name = "license"></a>
+
+> This software is licensed under MIT License, See [License](https://github.com/CMP24-SWE-TEAM3/Backend/blob/main/LICENSE) .
 
