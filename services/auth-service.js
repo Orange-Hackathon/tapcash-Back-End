@@ -14,27 +14,7 @@ class AuthService extends Service {
   constructor(model) {
     super(model);
   }
-  /**
-   * Check whether user name is in database or not (function)
-   * @param {Object} username username of the user.
-   * @returns {String} state of the operation whether false or true to indicate the sucess.
-   * @returns {Object} user return from the database.
-   * @function
-   */
-  availableUser = async (username) => {
-    const user = await this.getOne({ _id: username });
-    if (user) {
-      return {
-        state: false,
-        user: user,
-      };
-    } else {
-      return {
-        state: true,
-        user: null,
-      };
-    }
-  };
+ 
 
 /**
    * Check whether user name is in database or not (function)
@@ -150,24 +130,7 @@ availablePhoneNumber = async (phoneNumber) => {
       }
   }
   
-  /**
-   * Check whether email is in database or not (function)
-   * @param {String} email  state of the operation whether false or true to indicate the sucess.
-   * @returns {Boolean} exist whether the email exists or not.
-   * @function
-   */
-  availableEmail = async (email) => {
-    const user = await this.getOne({ email: email });
-    if (user) {
-      return {
-        exist: true,
-      };
-    } else {
-      return {
-        exist: false,
-      };
-    }
-  };
+ 
   /**
    * Save user in database
    * @param {String} email email of the user
@@ -209,38 +172,8 @@ availablePhoneNumber = async (phoneNumber) => {
       });
     return result;
   };
-  /**
-   * Check whether google account or facebook account is in database or not (function)
-   * @param {String} email the email that will be searched by in the database.
-   * @param {String} type the type of the email that will be searched by in the database.
-   * @returns {Object} user the returned user from the database.
-   * @returns {Boolean} exist whether the email exists or not.
-   * @function
-   */
-  availabeGmailOrFacebook = async (email, type) => {
-    const user = await this.getOne({ email: email, type: type });
-    if (user) {
-      return {
-        exist: true,
-        user: user,
-      };
-    } else {
-      return {
-        exist: false,
-        user: null,
-      };
-    }
-  };
-  /**
-   * Change password according to type of email
-   * @param {param} type type of the email.
-   * @param {param} password password of the email.
-   * @returns {String} (type whether '1' or the password parameter).
-   * @function
-   */
-  changePasswordAccType = (type, password) => {
-    return type == "facebook" || type == "gmail" ? "1" : password;
-  };
+
+ 
   /**
    * Resets user PIN
    *  @param {string} username

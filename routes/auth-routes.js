@@ -9,7 +9,7 @@ router.post("/signup", authController.signup);
 router.post("/login", authController.login);
 router.post("/forget", authController.forgotPIN);
 
-router.patch(
+router.post(
   "/reset-PIN",authCheck ,authController.resetUserPIN
 );
 
